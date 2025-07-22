@@ -13,8 +13,6 @@ services:
       # API Configuration
       - API_HOST=0.0.0.0
       - API_PORT=8000
-    env_file:
-      - .env
     networks:
       - network_public
     deploy:
