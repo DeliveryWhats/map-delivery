@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  store-coverage-api:
+    image: sorrochey/store-coverage-api:latest
+    environment:
+      # Database Configuration
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      # API Configuration
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+    env_file:
+      - .env
+    networks:
+      - network_public
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.store-coverage-api.rule=Host(`map.zibb.com.br`)
+        - traefik.http.routers.store-coverage-api.entrypoints=websecure
+        - traefik.http.routers.store-coverage-api.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.store-coverage-api.priority=1
+        - traefik.http.routers.store-coverage-api.service=store-coverage-api
+        - traefik.http.services.store-coverage-api.loadbalancer.server.port=8000
+
+networks:
+  network_public:
+    external: true
+    name: network_public
