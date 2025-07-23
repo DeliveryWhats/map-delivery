@@ -46,7 +46,13 @@ async def check_coverage(request: LocationRequest):
         
         return LocationResponse(**result)
     
+    except HTTPException as e:
+        # Deixe o FastAPI tratar HTTPException normalmente
+        raise e
     except Exception as e:
+        import traceback
+        print("Erro interno:", e)
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 @app.get("/check-coverage")

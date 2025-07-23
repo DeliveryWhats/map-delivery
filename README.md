@@ -46,10 +46,10 @@ pip3 install -r requirements.txt
 
 2. Execute a API:
 ```bash
-python3 main.py
+uvicorn main:app --reload
 ```
 
-A API estará disponível em `http://localhost:8000`
+A API estará disponível em `http://127.0.0.1:8000/`
 
 **Nota**: O banco de dados PostgreSQL deve estar configurado e a tabela `company_delivery_map` deve existir com os dados de mapas KML/KMZ.
 
@@ -67,11 +67,8 @@ curl -X POST "http://localhost:8000/check-coverage" \
   }'
 ```
 
-### Endpoint GET: `/check-coverage`
+O campo store_id pode ser enviado opcionalmente para verificar se naquela loja específica a coordenada está coberta. Se não vamos retornar a primeira loja na company que cobre a coordenada.
 
-```bash
-curl "http://localhost:8000/check-coverage?latitude=-23.5450&longitude=-46.6350&company_id=1"
-```
 
 ### Parâmetros
 
