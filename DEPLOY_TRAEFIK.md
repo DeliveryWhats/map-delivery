@@ -15,11 +15,7 @@ Este guia explica como fazer o deploy da API no seu ambiente Docker Swarm com Tr
 
 ```bash
 # Deploy usando docker-compose.yml
-docker stack deploy -c docker-compose.yml store-coverage-stack
-
-# Ou usando o arquivo específico para Traefik
-docker stack deploy -c docker-compose.traefik.yml store-coverage-stack
-```
+docker buildx build --no-cache --platform linux/amd64 -t sorrochey/store-coverage-api:latest --push .
 
 ### 3. Verificar o deploy
 

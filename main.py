@@ -67,6 +67,3 @@ async def check_coverage_get(
     )
     return await check_coverage(request)
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host=config.API_HOST, port=config.API_PORT)
