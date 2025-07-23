@@ -22,13 +22,13 @@ services:
         constraints:
           - node.role == manager
       labels:
-        - traefik.enable=true
-        - traefik.http.routers.store-coverage-api.rule=Host(`map.zibb.com.br`)
-        - traefik.http.routers.store-coverage-api.entrypoints=websecure
-        - traefik.http.routers.store-coverage-api.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.store-coverage-api.priority=1
-        - traefik.http.routers.store-coverage-api.service=store-coverage-api
-        - traefik.http.services.store-coverage-api.loadbalancer.server.port=8000
+          - traefik.enable=true
+          - traefik.http.routers.store-coverage-api.rule=Host(`map.zibb.com.br` )
+          - traefik.http.routers.store-coverage-api.entrypoints=websecure
+          - traefik.http.routers.store-coverage-api.tls.certresolver=letsencryptresolver
+          - traefik.http.routers.store-coverage-api.priority=1
+          - traefik.http.routers.store-coverage-api.service=map_store-coverage-api
+          - traefik.http.services.map_store-coverage-api.loadbalancer.server.port=8000
 
 networks:
   network_public:
